@@ -1,0 +1,11 @@
+<nav class="mb-4">
+	<ul class="nav nav-underline justify-content-end">
+		<li class="nav-item">
+	    	<a class="nav-link{% if request.resolver_match.url_name == 'create-task' %} active{% endif %}" {% if request.resolver_match.url_name == 'create-task' %}aria-current="page"{% endif %} href="{% url 'tasks:create-task' %}">Create</a>
+	  	</li>
+	  <li class="nav-item">
+	    <a class="nav-link {% if request.resolver_match.url_name == 'list-task' %} active{% endif %}"  {% if request.resolver_match.url_name == 'list-task' %}aria-current="page"{% endif %} href="{% url 'tasks:list-task' %}">View Tasks</a>
+	  </li>
+	</ul>
+</nav>
+

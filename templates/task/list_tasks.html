@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %} Task List {% endblock title %}
+
+
+{% block content %}
+{% if form_status %}
+	<form action="{% url 'tasks:list-task' %}" method="GET">
+
+		<div class="mb-3">
+			<label for="id_status" class="form-label">{{form_status.status.label}} :</label>
+			{{form_status.status}}
+		</div>
+		<button type="submit" class="btn btn-outline-success">Search</button>
+	</form>
+
+{% endif %}
+
+	{% if tasks %}
+		
+
+		<table class="table my-5 table-bordered">
+		  <thead class="table-light">
+		    <tr>
+		      <th scope="col" colspan="4" class="text-center">Tasks</th>
+		    </tr>
+		    <tr>
+		    	<th class="text-center">View task</th>
+		    	<th scope="col" colspan="3" class="text-center">Options</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for task in tasks %}
+		  	<tr>
+			  	<td> 		
+			  		<a href="{% url 'tasks:detail-task' pk=task.pk %}" class="{% if task.is_complete == True %}text-decoration-line-through{% endif %} link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"> {{task.title}} </a>
+
+			  		
+			    </td>
+			    <td>
+			    		<form action="{% url 'tasks:delete-task' pk=task.pk %}" method="POST"> {% csrf_token %}
+			    			<div class="d-flex justify-content-center">
+			    				<button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+			    			</div>
+			    		</form>
+			    </td>
+			    <td>
+			    	<div class="d-flex justify-content-center">
+			    		<a href="{% url 'tasks:update-task' pk=task.pk %}" class="btn btn-outline-info btn-sm">Update information</a>
+			    	</div>
+			    </td>
+			    <td>
+			    {% if task.is_complete != True%}
+			    		<form action="{% url 'tasks:update-status-task' pk=task.pk %}" method="POST"> {% csrf_token %}
+			    			<div class="d-flex justify-content-center">
+			    				<button type="submit" class="btn btn-outline-success btn-sm">Complete</button>
+			    			</div>	
+			    		</form>
+			    {% else %}
+			    <div class="text-success">
+			    	<div class="d-flex justify-content-center">
+			    		<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+						  <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0"/>
+						  <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708"/>
+						</svg>
+			    	</div>
+			    </div>
+			    {% endif %}
+			    </td>
+			    
+
+		  	</tr>
+		
+			{% endfor %}
+		    
+		  </tbody>
+		</table>
+
+	{% include "includes/pagination.html" %}
+
+
+	{% else %}
+
+		<p class="text-decoration-underline mt-4">
+			There are no added tasks
+		</p>
+
+
+
+		
+	{% endif %}
+
+
+	{% block script %}
+		<script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+	{% endblock script %}
+
+	
+
+
+
+
+
+	
+{% endblock content %}

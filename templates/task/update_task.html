@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Update Task {% endblock title %}
+
+
+{% block content %}
+	<h1 class="text-center display-4"> Update Task Information</h1>
+
+	<form method="POST"> {% csrf_token %}
+		<div class="mb-3">
+			<label for="id_title" class="form-label">{{form.title.label}}</label>
+			{{form.title}}
+		</div>
+		{% if  form.title.errors %}
+			<p class="text-danger">
+				{{form.title.errors}}
+			</p>
+		{% endif %}
+
+
+		<div class="mb-3">
+			<label for="id_description" class="form-label">{{form.description.label}}</label>
+			{{form.description}}
+		</div>
+		
+		{% if  form.description.errors %}
+			<p class="text-danger">
+				{{form.description.errors}}
+			</p>
+		{% endif %}
+
+		<div class="mb-3">
+			<label for="id_is_complete" class="form-label">{{form.is_complete.label}}</label>
+			{{form.is_complete}}
+		</div>
+
+		<div class="d-grid col-6 mx-auto">
+		  <button type="submit" class="btn btn-success btn-lg">Update</button>
+		</div>
+	</form>
+
+{% endblock content %}
