@@ -148,7 +148,7 @@ For API configurations, the following was done:
 ```json
 "error": {
         "message": "There is no task with this id"
-  ` }
+   }
 ```
 
 #### Update task
@@ -170,7 +170,7 @@ For API configurations, the following was done:
 ```json
 "error": {
         "message": "There is no task with this id"
-  ` }
+ }
 ```
 
 #### Update Partial task
@@ -192,7 +192,7 @@ For API configurations, the following was done:
 ```json
 "error": {
         "message": "There is no task with this id"
-  ` }
+ }
 ```
 
 #### Delete task
@@ -213,7 +213,7 @@ For API configurations, the following was done:
 ```json
 "error": {
         "message": "There is no task with this id"
-  ` }
+ }
 ```
 
 
